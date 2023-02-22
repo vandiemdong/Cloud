@@ -1,25 +1,27 @@
-﻿using Cloud.Infrastructure.Models.Dto;
+﻿using AutoMapper;
+using Cloud.Infrastructure.Models.Dto;
 using Cloud.Infrastructure.Services.Interface;
-using Microsoft.AspNetCore.Http;
+using Cloud.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cloud.Web.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductController : Controller
     {
-        private IProductService _productService;
-        public ProductController(IProductService productService)
-        {
-            _productService = productService;
-        }
+		private IProductService _productService;
+		private IMapper _mapper;
+		public ProductController(IProductService productService, IMapper mapper)
+		{
+			_productService = productService;
+			_mapper = mapper;
+		}
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+		public async Task<IActionResult> Index()
         {
-            var products = await _productService.GetProducts();
-            return Ok(products);
-        }
+			var products = await _productService.GetProducts();
+
+			return View(_mapper.Map<List<ProductViewModel>>(products));
+
+		}
     }
 }
