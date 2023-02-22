@@ -7,10 +7,6 @@ jobs:
       - name: Send Notification to Slack
         if: always()
         uses: rtCamp/action-slack-notify@v2
-        with:
-          status: ${{ job.status }}
-          text: |
-            ${{ job.status }} - ${{ github.repository }} - ${{ github.ref }}
         env:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
             SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
