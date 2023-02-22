@@ -1,3 +1,9 @@
+using AutoMapper;
+using Cloud.Infrastructure.Services.Impl;
+using Cloud.Infrastructure.Services.Interface;
+using Cloud.Web;
+using Microsoft.AspNetCore.Hosting;
+
 namespace Cloud
 {
     public class Program
@@ -8,6 +14,13 @@ namespace Cloud
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+			IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+			builder.Services.AddSingleton(mapper);
+			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+			// Services
+			builder.Services.AddTransient<IProductService, ProductService>();
 
             var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using Cloud.Infrastructure.Models.Dto;
+﻿using Cloud.Core.Entities;
+using Cloud.Infrastructure.Models.Dto;
 using Cloud.Infrastructure.Services.Interface;
 
 namespace Cloud.Infrastructure.Services.Impl
@@ -20,9 +21,28 @@ namespace Cloud.Infrastructure.Services.Impl
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ProductDto>> GetProducts()
+        public async Task<IEnumerable<ProductDto>> GetProducts()
         {
-            throw new NotImplementedException();
-        }
-    }
+
+			var result = await Task.Run(() => GetSampleProducts());
+
+			return result;
+		}
+
+		private List<ProductDto> GetSampleProducts()
+		{
+
+			var list = new List<ProductDto>();
+			list.Add(new ProductDto() { ProductId = 1, Price = 20, Name = "Kavin" });
+			list.Add(new ProductDto() { ProductId = 2, Price = 30, Name = "Alen" });
+			list.Add(new ProductDto() { ProductId = 3, Price = 20, Name = "Suresh" });
+			list.Add(new ProductDto() { ProductId = 4, Price = 30, Name = "Jay" });
+			list.Add(new ProductDto() { ProductId = 5, Price = 20, Name = "Nanda" });
+			list.Add(new ProductDto() { ProductId = 5, Price = 20, Name = "Kavin" });
+			list.Add(new ProductDto() { ProductId = 5, Price = 20, Name = "Kavin" });
+			list.Add(new ProductDto() { ProductId = 1, Price = 23, Name = "Test" });
+
+			return list.ToList();
+		}
+	}
 }
