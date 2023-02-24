@@ -1,28 +1,27 @@
-﻿using Cloud.Core.Entities;
-using Cloud.Infrastructure.Models.Dto;
-using Cloud.Infrastructure.Services.Interface;
+﻿using Cloud.Infrastructure.Models.Dto;
+using Clould.Service.Interface;
 
-namespace Cloud.Infrastructure.Services.Impl
+namespace Clould.Service.Implementation
 {
-    public class ProductService : IProductService
-    {
-        public Task<ProductDto> CreateUpdateProduct(ProductDto productDto)
-        {
-            throw new NotImplementedException();
-        }
+	public class ProductService : IProductService
+	{
+		public Task<ProductDto> CreateUpdateProduct(ProductDto productDto)
+		{
+			throw new NotImplementedException();
+		}
 
-        public Task<bool> DeleteProduct(int productId)
-        {
-            throw new NotImplementedException();
-        }
+		public Task<bool> DeleteProduct(int productId)
+		{
+			throw new NotImplementedException();
+		}
 
-        public Task<ProductDto> GetProductById(int productId)
-        {
-            throw new NotImplementedException();
-        }
+		public Task<ProductDto> GetProductById(int productId)
+		{
+			throw new NotImplementedException();
+		}
 
-        public async Task<IEnumerable<ProductDto>> GetProducts()
-        {
+		public async Task<IEnumerable<ProductDto>> GetProducts()
+		{
 
 			var result = await Task.Run(() => GetSampleProducts());
 
@@ -31,7 +30,6 @@ namespace Cloud.Infrastructure.Services.Impl
 
 		private List<ProductDto> GetSampleProducts()
 		{
-
 			var list = new List<ProductDto>();
 			list.Add(new ProductDto() { ProductId = 1, Price = 20, Name = "Kavin" });
 			list.Add(new ProductDto() { ProductId = 2, Price = 30, Name = "Alen" });

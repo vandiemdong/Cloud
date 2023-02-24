@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Cloud.Infrastructure.Models.Dto;
-using Cloud.Infrastructure.Services.Interface;
 using Cloud.Web.Models;
+using Clould.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cloud.Web.Controllers

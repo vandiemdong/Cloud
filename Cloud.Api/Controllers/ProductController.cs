@@ -1,6 +1,4 @@
-﻿using Cloud.Infrastructure.Models.Dto;
-using Cloud.Infrastructure.Services.Interface;
-using Microsoft.AspNetCore.Http;
+﻿using Clould.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cloud.Web.Controllers

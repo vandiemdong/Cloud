@@ -1,13 +1,12 @@
-name: The name of your workflow
 on: push
+name: Slack Notification
 jobs:
-  deploy:
+  slackNotification:
+    name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-      - uses: craftech-io/slack-action@v1
-        with:
-          slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-          slack_channel: general
-          slack_username: Github
-          status: failure
-        if: failure()
+    - uses: actions/checkout@v2
+    - name: Slack Notification
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

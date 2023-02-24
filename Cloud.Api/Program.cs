@@ -1,6 +1,6 @@
 
-using Cloud.Infrastructure.Services.Impl;
-using Cloud.Infrastructure.Services.Interface;
+using Clould.Service.Implementation;
+using Clould.Service.Interface;
 
 namespace Cloud.Web
 {

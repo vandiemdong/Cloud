@@ -1,8 +1,7 @@
 using AutoMapper;
-using Cloud.Infrastructure.Services.Impl;
-using Cloud.Infrastructure.Services.Interface;
 using Cloud.Web;
-using Microsoft.AspNetCore.Hosting;
+using Clould.Service.Interface;
+using Clould.Service.Implementation;
 
 namespace Cloud
 {
