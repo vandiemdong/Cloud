@@ -3,8 +3,8 @@
 
 namespace Cloud.Core.Entities
 {
-    public class Product
-    {
+    public class Product: BaseEntity
+	{
         [Key]
         public int ProductId { get; set; }
         [Required]

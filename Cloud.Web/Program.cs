@@ -2,6 +2,7 @@ using AutoMapper;
 using Cloud.Web;
 using Clould.Service.Interface;
 using Clould.Service.Implementation;
+using Cloud.Infrastructure.Configuaration;
 
 namespace Cloud
 {
@@ -11,8 +12,10 @@ namespace Cloud
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            ConfiguarationService.Register(builder.Services);
+
+			// Add services to the container.
+			builder.Services.AddControllersWithViews();
 
 			IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 			builder.Services.AddSingleton(mapper);
