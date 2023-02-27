@@ -1,8 +1,7 @@
 using AutoMapper;
-using Cloud.Web;
-using Clould.Service.Interface;
-using Clould.Service.Implementation;
 using Cloud.Infrastructure.Configuaration;
+using Clould.Service;
+using Clould.Service.Configuaration;
 
 namespace Cloud
 {
@@ -13,6 +12,7 @@ namespace Cloud
             var builder = WebApplication.CreateBuilder(args);
 
             ConfiguarationService.Register(builder.Services);
+			DependencyResolverService.Register(builder.Services);
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
@@ -22,9 +22,7 @@ namespace Cloud
 			builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 			// Services
-			builder.Services.AddTransient<IProductService, ProductService>();
-
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

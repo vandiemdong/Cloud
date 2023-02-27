@@ -1,13 +1,40 @@
-﻿using Cloud.Infrastructure.Models.Dto;
+﻿using AutoMapper;
+using Cloud.Core.Interface;
+using Cloud.Infrastructure;
+using Cloud.Infrastructure.Data;
+using Cloud.Infrastructure.Models.Dto;
 using Clould.Service.Interface;
 
 namespace Clould.Service.Implementation
 {
 	public class ProductService : IProductService
 	{
-		public Task<ProductDto> CreateUpdateProduct(ProductDto productDto)
+		private readonly MainDbContext _context;
+		private readonly IProductRepository _productRepository;
+		private readonly IUnitOfWork _unitOfWork;
+		private IMapper _mapper;
+
+		public ProductService(MainDbContext context, IMapper mapper, IProductRepository productRepository, IUnitOfWork unitOfWork)
 		{
-			throw new NotImplementedException();
+			_context = context;
+			_mapper = mapper;
+			_productRepository = productRepository;
+			_unitOfWork = unitOfWork;
+		}
+		public async Task AddAsync(ProductDto product)
+		{
+			await _unitOfWork.BeginTransactionAsync();
+
+			try
+			{
+				await _productRepository.AddAsync(new Cloud.Core.Entities.Product { CategoryName = product.Name});
+				await _unitOfWork.CommitAsync();
+			}
+			catch
+			{
+				await _unitOfWork.RollbackAsync();
+				
+			}
 		}
 
 		public Task<bool> DeleteProduct(int productId)
@@ -22,25 +49,10 @@ namespace Clould.Service.Implementation
 
 		public async Task<IEnumerable<ProductDto>> GetProducts()
 		{
+			var products = await _productRepository.GetAllAsync();
+			var productDTOs = _mapper.Map<List<ProductDto>>(products);
 
-			var result = await Task.Run(() => GetSampleProducts());
-
-			return result;
-		}
-
-		private List<ProductDto> GetSampleProducts()
-		{
-			var list = new List<ProductDto>();
-			list.Add(new ProductDto() { ProductId = 1, Price = 20, Name = "Kavin" });
-			list.Add(new ProductDto() { ProductId = 2, Price = 30, Name = "Alen" });
-			list.Add(new ProductDto() { ProductId = 3, Price = 20, Name = "Suresh" });
-			list.Add(new ProductDto() { ProductId = 4, Price = 30, Name = "Jay" });
-			list.Add(new ProductDto() { ProductId = 5, Price = 20, Name = "Nanda" });
-			list.Add(new ProductDto() { ProductId = 5, Price = 20, Name = "Kavin" });
-			list.Add(new ProductDto() { ProductId = 5, Price = 20, Name = "Kavin" });
-			list.Add(new ProductDto() { ProductId = 1, Price = 23, Name = "Test" });
-
-			return list.ToList();
+			return productDTOs;
 		}
 	}
 }

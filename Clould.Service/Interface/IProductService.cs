@@ -1,4 +1,5 @@
-﻿using Cloud.Infrastructure.Models.Dto;
+﻿using Cloud.Core.Entities;
+using Cloud.Infrastructure.Models.Dto;
 
 namespace Clould.Service.Interface
 {
@@ -6,7 +7,7 @@ namespace Clould.Service.Interface
 	{
 		Task<IEnumerable<ProductDto>> GetProducts();
 		Task<ProductDto> GetProductById(int productId);
-		Task<ProductDto> CreateUpdateProduct(ProductDto productDto);
+		Task AddAsync(ProductDto product);
 		Task<bool> DeleteProduct(int productId);
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Cloud.Infrastructure.Models.Dto;
 using Cloud.Web.Models;
 using Clould.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +20,7 @@ namespace Cloud.Web.Controllers
         {
 			var products = await _productService.GetProducts();
 
-			return View(_mapper.Map<List<ProductViewModel>>(products));
+			return View();
 
 		}
     }
